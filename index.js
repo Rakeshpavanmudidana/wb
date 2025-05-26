@@ -1,10 +1,27 @@
 window.onload = function () {
+  const dob = new Date(this.value);
   const today = new Date();
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
-  document.getElementById('dob').setAttribute('min', minDate.toISOString().split('T')[0]);
-  document.getElementById('dob').setAttribute('max', maxDate.toISOString().split('T')[0]);
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+
+  // Adjust days and months if needed
+  if (days < 0) {
+    months--;
+    // Get days in previous month
+    const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  if (years < 18 || years > 55) {
+    alert("Age must be between 18 and 55 years.")
+}
 }
 
 let entries = JSON.parse(localStorage.getItem('entries')) || [];
