@@ -1,21 +1,21 @@
-window.onload = function () {
-  const dobInput = document.getElementById("dob");
-  const today = new Date();
 
-  // Max date = today - 18 years (accurate to day/month/year)
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+const dobInput = document.getElementById("dob");
+const today = new Date();
 
-  // Min date = today - 55 years (accurate to day/month/year)
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+// Max date = today - 18 years (accurate to day/month/year)
+const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
-  // Convert to YYYY-MM-DD and set attributes
-  dobInput.max = maxDate.toISOString().split("T")[0];
-  dobInput.min = minDate.toISOString().split("T")[0];
+// Min date = today - 55 years (accurate to day/month/year)
+const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-  // Log to console
-  console.log("Min Date:", dobInput.min);
-  console.log("Max Date:", dobInput.max);
-};
+// Convert to YYYY-MM-DD and set attributes
+dobInput.max = maxDate.toISOString().split("T")[0];
+dobInput.min = minDate.toISOString().split("T")[0];
+
+// Log to console
+console.log("Min Date:", dobInput.min);
+console.log("Max Date:", dobInput.max);
+
 
 
 let entries = JSON.parse(localStorage.getItem('entries')) || [];
