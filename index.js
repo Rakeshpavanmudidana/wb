@@ -32,7 +32,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     const dobInput = document.getElementById('dob');
     const dob = dobInput.value;
     const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
-    if ( !validateDob( dobInput ) )
+    if ( !validateDob( dob ) )
     {
       alert("Age must be between 18 and 55.");
       return;
