@@ -12,6 +12,7 @@ window.onload = function () {
   // Convert to YYYY-MM-DD and set attributes
   dobInput.max = maxDate.toISOString().split("T")[0];
   dobInput.min = minDate.toISOString().split("T")[0];
+    console.log(max);
 };
 
 }
