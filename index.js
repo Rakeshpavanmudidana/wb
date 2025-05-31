@@ -1,5 +1,4 @@
 window.onload = function () {
-  window.onload = function () {
   const dobInput = document.getElementById("dob");
   const today = new Date();
 
@@ -12,10 +11,12 @@ window.onload = function () {
   // Convert to YYYY-MM-DD and set attributes
   dobInput.max = maxDate.toISOString().split("T")[0];
   dobInput.min = minDate.toISOString().split("T")[0];
-    console.log(max);
+
+  // Log to console
+  console.log("Min Date:", dobInput.min);
+  console.log("Max Date:", dobInput.max);
 };
 
-}
 
 let entries = JSON.parse(localStorage.getItem('entries')) || [];
 
