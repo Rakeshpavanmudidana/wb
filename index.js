@@ -15,27 +15,34 @@
 // console.log("Min Date:", dobInput.min);
 // console.log("Max Date:", dobInput.max);
 
+ window.addEventListener('DOMContentLoaded', function () {
+    const dobInput = document.getElementById("dob");
+    const today = new Date();
 
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-function validateDate( dobInput )
-{
-  const value = new Date(dobInput.value);
-  const today = new Date();
+    const formatDate = (date) => date.toISOString().split("T")[0];
 
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+    dobInput.min = formatDate(minDate);
+    dobInput.max = formatDate(maxDate);
+   console.log("Min Date:", dobInput.min);
+console.log("Max Date:", dobInput.max);
+  });
 
-  if (value > maxDate || value < minDate) {
-    dobInput.setCustomValidity("Age must be between 18 and 55 years.");
-    dobInput.reportValidity()
-    return false;
-  } else {
-    dobInput.setCustomValidity(""); // Clear message
-    dobInput.reportValidity()
-    return true;
-  }
+function formatDate(date) {
+  const year = date.getFullYear();
 
+  
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
 }
+
+
+
+
 
 
 
@@ -50,11 +57,8 @@ document.querySelector('form').addEventListener('submit', function(event) {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const dobInput = document.getElementById('dob');
-    const dob = dobInput.value;
+    const dob =document.getElementById('dob').value;
     const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
-    if ( validateDate( dobInput ) )
-    {
       entries.push({
         name,
         email,
