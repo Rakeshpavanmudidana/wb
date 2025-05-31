@@ -3,7 +3,7 @@
 <div class="mx-auto max-w-sm rounded-xl bg-white p-6 shadow-lg outline mT-40">
   <h2 class="text-lg font-semibold text-gray-800 mb-4 text-center">Registration Form</h2>
 
-  <form class="flex flex-col gap-y-4" id = "user-form">
+  <form class="flex flex-col gap-y-4">
     <div class="flex flex-col">
       <label for="name">Name</label>
       <input type="text" id="name" placeholder="Enter your name" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-blue-500" required />
@@ -25,8 +25,8 @@
     </div>
 
     <div class="flex items-center gap-x-2 p-3 rounded-md cursor-pointer w-fit">
-      <input type="checkbox" id="acceptTerms" class="w-4 h-4 text-blue-600 border-gray-300 rounded" />
-      <label for="acceptTerms" class="text-sm text-gray-700 select-none">Accept Terms & Conditions</label>
+      <input type="checkbox" id="toggle" class="w-4 h-4 text-blue-600 border-gray-300 rounded" />
+      <label for="toggle" class="text-sm text-gray-700 select-none">Accept Terms & Conditions</label>
     </div>
 
     <button type="submit" >Submit</button>
@@ -38,7 +38,7 @@
   <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Entries</h1>
 
   <div class="overflow-x-auto">
-    <table class="min-w-full table-auto text-sm text-left text-gray-800" id="table-body">
+    <table class="min-w-full table-auto text-sm text-left text-gray-800">
       <thead>
         <tr class="border-b">
           <th class="px-3 py-2 font-semibold whitespace-nowrap">Name</th>
