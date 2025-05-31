@@ -18,20 +18,20 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 
-const dobInput = document.getElementById("dob");
-dobInput.addEventListener("input", function () {
-  const value = new Date(this.value);
-  const today = new Date();
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+// const dobInput = document.getElementById("dob");
+// dobInput.addEventListener("input", function () {
+//   const value = new Date(this.value);
+//   const today = new Date();
+//   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+//   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-  if (value < minDate || value > maxDate) {
-    this.setCustomValidity("Age must be between 18 and 55 years.");
+//   if (value < minDate || value > maxDate) {
+//     this.setCustomValidity("Age must be between 18 and 55 years.");
     
-  } else {
-    this.setCustomValidity("");
-  }
-});
+//   } else {
+//     this.setCustomValidity("");
+//   }
+// });
 
 
 
