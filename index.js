@@ -1,8 +1,6 @@
+const form = document.getElementById('user-form');
+const tableBody = document.getElementById('table-body');
 
-function validateDob(dob) {
-  const age = getAge(dob);
-  return age >= 18 && age <= 55;
-}
 function getAge(dateString) {
   const today = new Date();
   const dob = new Date(dateString);
@@ -14,66 +12,56 @@ function getAge(dateString) {
   return age;
 }
 
+function validateDob(dob) {
+  const age = getAge(dob);
+  return age >= 18 && age <= 55;
+}
 
-const dobInput = document.getElementById("dob");
-dobInput.addEventListener("input", function () {
-  const value = new Date(this.value);
-  const today = new Date();
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+function getData() {
+  return JSON.parse(localStorage.getItem("user-entries") || "[]");
+}
 
-  if (!validateDob(dob) {
-    this.setCustomValidity("Age must be between 18 and 55 years.");
-    
-  } else {
-    this.setCustomValidity("");
-  }
-});
+function setData(data) {
+  localStorage.setItem("user-entries", JSON.stringify(data));
+}
 
+function showData() {
+  const entries = getData();
+  tableBody.innerHTML = "";
 
+  entries.forEach(entry => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${entry.name}</td>
+      <td>${entry.email}</td>
+      <td>${entry.password}</td>
+      <td>${entry.dob}</td>
+      <td>${entry.accepted ? "true" : "false"}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
 
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
 
+  const name = form.name.value;
+  const email = form.email.value;
+  const password = form.password.value;
+  const dob = form.dob.value;
+  const accepted = form.acceptTerms.checked;
 
-let entries = JSON.parse(localStorage.getItem('entries')) || [];
-
-addrows();
-
-document.querySelector('form').addEventListener('submit', function(event) {
-
-  // Form is valid → proceed
-  event.preventDefault(); // you still want to stop default so you can handle manually
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const dob = document.getElementById('dob').value;
-  const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
   if (!validateDob(dob)) {
     alert("Age must be between 18 and 55.");
     return;
   }
 
-  entries.push({ name, email, password, dob, acceptedTerms });
-  localStorage.setItem('entries', JSON.stringify(entries));
-  addrow({ name, email, password, dob, acceptedTerms });
-  this.reset();
+  const newEntry = { name, email, password, dob, accepted };
+  const entries = getData();
+  entries.push(newEntry);
+  setData(entries);
+  showData();
+  form.reset();
 });
 
-  function addrow( entry){
-    const table = document.querySelector('table');
-    const newRow = table.insertRow(-1);
-    newRow.innerHTML = `
-      <td class="px-3 py-2 whitespace-nowrap">${entry.name}</td>
-      <td class="px-3 py-2 whitespace-nowrap">${entry.email}</td>
-      <td class="px-3 py-2 whitespace-nowrap">${entry.password}</td>
-      <td class="px-3 py-2 whitespace-nowrap">${entry.dob}</td>
-      <td class="px-3 py-2 whitespace-nowrap">${entry.acceptedTerms}</td>
-    `;
-  }
-
-  
-  function addrows() {
-    entries.forEach(entry => {
-      addrow(entry);
-    });
-  }
+window.onload = showData;
