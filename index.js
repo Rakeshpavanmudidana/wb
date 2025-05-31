@@ -9,7 +9,7 @@ function getAge(dateString) {
   }
   return age;
 }
-
+ 
 function validateDob(dob) {
   const age = getAge(dob);
   return age >= 18 && age <= 55;
