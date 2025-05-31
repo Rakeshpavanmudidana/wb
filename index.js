@@ -15,7 +15,7 @@
 
 // console.log("Min Date:", dobInput.min);
 // console.log("Max Date:", dobInput.max);
-
+ 
 
 
 function validateDate( dobInput )
