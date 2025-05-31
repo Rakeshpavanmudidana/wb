@@ -27,9 +27,11 @@ function validateDate( dobInput )
 
   if (value > maxDate || value < minDate) {
     dobInput.setCustomValidity("Age must be between 18 and 55 years.");
+    dobInput.reportValidity()
     return false;
   } else {
     dobInput.setCustomValidity(""); // Clear message
+    dobInput.reportValidity()
     return true;
   }
 
