@@ -70,6 +70,10 @@ document.querySelector('form').addEventListener('submit', function(event) {
   const password = document.getElementById('password').value;
   const dob = document.getElementById('dob').value;
   const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
+  if (!validateDob(dob)) {
+    alert("Age must be between 18 and 55.");
+    return;
+  }
 
   entries.push({ name, email, password, dob, acceptedTerms });
   localStorage.setItem('entries', JSON.stringify(entries));
