@@ -9,12 +9,20 @@ const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDa
 const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
 // Convert to YYYY-MM-DD and set attributes
-dobInput.max = maxDate.toISOString().split("T")[0];
-dobInput.min = minDate.toISOString().split("T")[0];
+dobInput.max = formatDate(maxDate);
+dobInput.min = formatDate(minDate);
 
-// Log to console
 console.log("Min Date:", dobInput.min);
 console.log("Max Date:", dobInput.max);
+
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are 0-indexed
+  const day = ('0' + date.getDate()).slice(-2);
+  return `${year}-${month}-${day}`;
+}
+
 
 
 
