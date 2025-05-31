@@ -1,42 +1,22 @@
 
+window.addEventListener("DOMContentLoaded", function () {
+  const dobInput = document.getElementById("dob");
+  const today = new Date();
 
-// const dobInput = document.getElementById("dob");
-// const today = new Date();
+  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-// // Max date = today - 18 years (accurate to day/month/year)
-// const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
-// // Min date = today - 55 years (accurate to day/month/year)
-// const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+  dobInput.max = formatDate(maxDate);
+  dobInput.min = formatDate(minDate);
+});
 
-// // Convert to YYYY-MM-DD and set attributes
-// dobInput.max = formatDate(maxDate);
-// dobInput.min = formatDate(minDate);
-
-// console.log("Min Date:", dobInput.min);
-// console.log("Max Date:", dobInput.max);
- 
-
-
-// function validateDate( dobInput )
-// {
-//   const value = new Date(dobInput.value);
-//   const today = new Date();
-
-//   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-//   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
-
-//   if (value > maxDate || value < minDate) {
-//     dobInput.setCustomValidity("Age must be between 18 and 55 years.");
-//     dobInput.reportValidity()
-//     return false;
-//   } else {
-//     dobInput.setCustomValidity(""); // Clear message
-//     // dobInput.reportValidity()
-//     return true;
-//   }
-
-// }
 
 const dobInput = document.getElementById("dob");
 dobInput.addEventListener("input", function () {
@@ -62,33 +42,26 @@ let entries = JSON.parse(localStorage.getItem('entries')) || [];
 addrows();
 
 document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();
+  const form = event.target;
+  if (!form.checkValidity()) {
+    event.preventDefault(); // stop only if invalid
+    return;
+  }
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const dob = document.getElementById('dob').value;
-    const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
-      entries.push({
-        name,
-        email,
-        password,
-        dob,
-        acceptedTerms
-      });
-  
-      localStorage.setItem('entries', JSON.stringify(entries));
-      
-      addrow({
-        name,
-        email,
-        password,
-        dob,
-        acceptedTerms
-      });
-      this.reset();
-  
-  });
+  // Form is valid → proceed
+  event.preventDefault(); // you still want to stop default so you can handle manually
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const dob = document.getElementById('dob').value;
+  const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
+
+  entries.push({ name, email, password, dob, acceptedTerms });
+  localStorage.setItem('entries', JSON.stringify(entries));
+  addrow({ name, email, password, dob, acceptedTerms });
+  this.reset();
+});
 
   function addrow( entry){
     const table = document.querySelector('table');
