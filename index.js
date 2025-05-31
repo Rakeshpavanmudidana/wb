@@ -1,4 +1,23 @@
 
+
+
+function getAge(dateString) {
+  const today = new Date();
+  const dob = new Date(dateString);
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function validateDob(dob) {
+  const age = getAge(dob);
+  return age >= 18 && age <= 55;
+}
+
+
 const dobInput = document.getElementById("dob");
 dobInput.addEventListener("input", function () {
   const value = new Date(this.value);
@@ -6,7 +25,7 @@ dobInput.addEventListener("input", function () {
   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-  if (value < minDate || value > maxDate) {
+  if (validateDob) {
     this.setCustomValidity("Age must be between 18 and 55 years.");
     
   } else {
