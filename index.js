@@ -18,25 +18,41 @@
  
 
 
-function validateDate( dobInput )
-{
-  const value = new Date(dobInput.value);
-  const today = new Date();
+// function validateDate( dobInput )
+// {
+//   const value = new Date(dobInput.value);
+//   const today = new Date();
 
+//   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+//   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
+
+//   if (value > maxDate || value < minDate) {
+//     dobInput.setCustomValidity("Age must be between 18 and 55 years.");
+//     dobInput.reportValidity()
+//     return false;
+//   } else {
+//     dobInput.setCustomValidity(""); // Clear message
+//     // dobInput.reportValidity()
+//     return true;
+//   }
+
+// }
+
+const dobInput = document.getElementById("dob");
+dobInput.addEventListener("input", function () {
+  const value = new Date(this.value);
+  const today = new Date();
   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-  if (value > maxDate || value < minDate) {
-    dobInput.setCustomValidity("Age must be between 18 and 55 years.");
-    dobInput.reportValidity()
-    return false;
+  if (value < minDate || value > maxDate) {
+    this.setCustomValidity("Age must be between 18 and 55 years.");
+    
   } else {
-    dobInput.setCustomValidity(""); // Clear message
-    // dobInput.reportValidity()
-    return true;
+    this.setCustomValidity("");
   }
+});
 
-}
 
 
 
@@ -51,11 +67,8 @@ document.querySelector('form').addEventListener('submit', function(event) {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const dobInput = document.getElementById('dob');
-    const dob = dobInput.value;
+    const dob = document.getElementById('dob').value;
     const acceptedTerms = document.getElementById('toggle').checked ? 'true' : 'false';
-    if ( validateDate( dobInput ) )
-    {
       entries.push({
         name,
         email,
@@ -74,9 +87,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         acceptedTerms
       });
       this.reset();
-    }
-  else{
-    dobInput.reportValidity();}
+  
   });
 
   function addrow( entry){
