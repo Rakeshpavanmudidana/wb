@@ -1,21 +1,4 @@
 
-window.addEventListener("DOMContentLoaded", function () {
-  const dobInput = document.getElementById("dob");
-  const today = new Date();
-
-  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-  const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
-
-  function formatDate(date) { 
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
-
-  dobInput.max = formatDate(maxDate);
-  dobInput.min = formatDate(minDate);
-});
 function validateDob(dob) {
   const age = getAge(dob);
   return age >= 18 && age <= 55;
@@ -56,11 +39,6 @@ let entries = JSON.parse(localStorage.getItem('entries')) || [];
 addrows();
 
 document.querySelector('form').addEventListener('submit', function(event) {
-  const form = event.target;
-  if (!form.checkValidity()) {
-    event.preventDefault(); // stop only if invalid
-    return;
-  }
 
   // Form is valid → proceed
   event.preventDefault(); // you still want to stop default so you can handle manually
