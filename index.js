@@ -15,6 +15,7 @@
 // console.log("Min Date:", dobInput.min);
 // console.log("Max Date:", dobInput.max);
 
+
  window.addEventListener('DOMContentLoaded', function () {
     const dobInput = document.getElementById("dob");
     const today = new Date();
