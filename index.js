@@ -1,15 +1,4 @@
 
-function isValidAge(dob) {
-  const birthDate = new Date(dob);
-  const today = new Date();
-
-  const ageInMilliseconds = today - birthDate;
-  const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-
-  return ageInYears >= 18 && ageInYears <= 55;
-}
-
-
 const dobInput = document.getElementById("dob");
 dobInput.addEventListener("input", function () {
   const value = new Date(this.value);
@@ -17,7 +6,7 @@ dobInput.addEventListener("input", function () {
   const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   const minDate = new Date(today.getFullYear() - 55, today.getMonth(), today.getDate());
 
-  if ( !isValidAge(value) {
+  if (value < minDate || value > maxDate) {
     this.setCustomValidity("Age must be between 18 and 55 years.");
     
   } else {
